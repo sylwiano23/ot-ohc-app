@@ -1,0 +1,15 @@
+{
+  "action": {
+    "upload": "Upload"
+  },
+  "error": {
+    "load": "Unable to load",
+    "save": "Unable to save"
+  },
+  "success": {
+    "save": "Saved"
+  },
+  "title": {
+    "list": "List"
+  }
+}

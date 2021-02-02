@@ -1,0 +1,263 @@
+<div class="row justify-content-md-center">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <form *ngIf="surveyForm" class="survey__form" [formGroup]="surveyForm" (ngSubmit)="onSubmit(surveyForm.value)">
+      <ng-container *ngFor="let prop of surveyProperties">
+        <ng-container [ngSwitch]="prop">
+          <div *ngSwitchDefault class="form-group">
+            <label [for]="prop">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}</label>
+            <input
+              type="text"
+              class="form-control"
+              [id]="prop"
+              [class.is-invalid]="getFormField(prop)?.invalid"
+              [placeholder]="SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop]"
+              [formControlName]="prop"
+            />
+
+            <div *ngIf="getFormField(prop)?.invalid" class="invalid-feedback">
+              <div *ngIf="getFormField(prop).errors.required">
+                Proszę wypełnić pole
+              </div>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'date'" class="form-group">
+            <label>{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}</label>
+            <input
+              matInput
+              [matDatepicker]="date"
+              class="form-control"
+              [class.is-invalid]="getFormField(prop)?.invalid"
+              [placeholder]="SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop]"
+              [formControlName]="prop"
+              (click)="date.open()"
+            />
+            <mat-datepicker #date></mat-datepicker>
+
+            <div *ngIf="getFormField(prop)?.invalid" class="invalid-feedback">
+              <div *ngIf="getFormField(prop).errors.required">
+                Proszę wypełnić pole
+              </div>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'nextSurveyDate'" class="form-group">
+            <label>{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}</label>
+            <input
+              matInput
+              [matDatepicker]="nextSurveyDate"
+              class="form-control"
+              [class.is-invalid]="getFormField(prop)?.invalid"
+              [placeholder]="SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop]"
+              [formControlName]="prop"
+              (click)="nextSurveyDate.open()"
+            />
+            <mat-datepicker #nextSurveyDate></mat-datepicker>
+
+            <div *ngIf="getFormField(prop)?.invalid" class="invalid-feedback">
+              <div *ngIf="getFormField(prop).errors.required">
+                Proszę wypełnić pole
+              </div>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'position'" class="form-group">
+            <label>{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}</label>
+            <ng-select
+              [items]="positions"
+              bindLabel="name"
+              bindValue="id"
+              [multiple]="true"
+              [closeOnSelect]="false"
+              [hideSelected]="true"
+              [placeholder]="SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop]"
+              [id]="prop"
+              [formControlName]="prop"
+            >
+            </ng-select>
+
+            <div *ngIf="getFormField(prop)?.invalid" class="invalid-feedback">
+              <div *ngIf="getFormField(prop).errors.required">
+                Proszę wypełnić pole
+              </div>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'isNormExceeded'" class="form-group">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [id]="prop"
+                [class.is-invalid]="getFormField(prop)?.invalid"
+                [placeholder]="SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop]"
+                [formControlName]="prop"
+              />
+              <label class="form-check-label" [for]="prop">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}</label>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'isSurveySuspend'" class="form-group">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [id]="prop"
+                [class.is-invalid]="getFormField(prop)?.invalid"
+                [placeholder]="SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop]"
+                [formControlName]="prop"
+              />
+              <label class="form-check-label" [for]="prop">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}</label>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'isSurveyUsed'" class="form-group">
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [id]="prop"
+                [class.is-invalid]="getFormField(prop)?.invalid"
+                [placeholder]="SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop]"
+                [formControlName]="prop"
+              />
+              <label class="form-check-label" [for]="prop">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}</label>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="typeKey === 'ElectromagneticField'">
+        <div class="form-group">
+          <label class="text-center">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["intermediate_zone"] }}</label>
+          <hr />
+
+          <div class="form-row">
+            <div class="col">
+              <label [for]="'intermediateZoneE'">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["intermediateZoneE"] }}</label>
+              <input
+                type="text"
+                class="form-control"
+                [id]="'intermediateZoneE'"
+                [class.is-invalid]="getFormField('intermediateZoneE')?.invalid"
+                [formControlName]="'intermediateZoneE'"
+              />
+
+              <div *ngIf="getFormField('intermediateZoneE')?.invalid" class="invalid-feedback">
+                <div *ngIf="getFormField('intermediateZoneE').errors.required">
+                  Proszę wypełnić pole
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <label [for]="'intermediateZoneH'">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["intermediateZoneH"] }}</label>
+              <input
+                type="text"
+                class="form-control"
+                [id]="'intermediateZoneH'"
+                [class.is-invalid]="getFormField('intermediateZoneH')?.invalid"
+                [formControlName]="'intermediateZoneH'"
+              />
+
+              <div *ngIf="getFormField('intermediateZoneH')?.invalid" class="invalid-feedback">
+                <div *ngIf="getFormField('intermediateZoneH').errors.required">
+                  Proszę wypełnić pole
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="text-center">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["risk_zone"] }}</label>
+          <hr />
+
+          <div class="form-row">
+            <div class="col">
+              <label [for]="'riskZoneE'">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["riskZoneE"] }}</label>
+              <input
+                type="text"
+                class="form-control"
+                [id]="'riskZoneE'"
+                [class.is-invalid]="getFormField('riskZoneE')?.invalid"
+                [formControlName]="'riskZoneE'"
+              />
+
+              <div *ngIf="getFormField('riskZoneE')?.invalid" class="invalid-feedback">
+                <div *ngIf="getFormField('riskZoneE').errors.required">
+                  Proszę wypełnić pole
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <label [for]="'riskZoneH'">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["riskZoneH"] }}</label>
+              <input
+                type="text"
+                class="form-control"
+                [id]="'riskZoneH'"
+                [class.is-invalid]="getFormField('riskZoneH')?.invalid"
+                [formControlName]="'riskZoneH'"
+              />
+
+              <div *ngIf="getFormField('riskZoneH')?.invalid" class="invalid-feedback">
+                <div *ngIf="getFormField('riskZoneH').errors.required">
+                  Proszę wypełnić pole
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="text-center">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["danger_zone"] }}</label>
+          <hr />
+
+          <div class="form-row">
+            <div class="col">
+              <label [for]="'dengerousZoneE'">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["dengerousZoneE"] }}</label>
+              <input
+                type="text"
+                class="form-control"
+                [id]="'dengerousZoneE'"
+                [class.is-invalid]="getFormField('dengerousZoneE')?.invalid"
+                [formControlName]="'dengerousZoneE'"
+              />
+
+              <div *ngIf="getFormField('dengerousZoneE')?.invalid" class="invalid-feedback">
+                <div *ngIf="getFormField('dengerousZoneE').errors.required">
+                  Proszę wypełnić pole
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <label [for]="'dengerousZoneH'">{{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS["dengerousZoneH"] }}</label>
+              <input
+                type="text"
+                class="form-control"
+                [id]="'dengerousZoneH'"
+                [class.is-invalid]="getFormField('dengerousZoneH')?.invalid"
+                [formControlName]="'dengerousZoneH'"
+              />
+
+              <div *ngIf="getFormField('dengerousZoneH')?.invalid" class="invalid-feedback">
+                <div *ngIf="getFormField('dengerousZoneH').errors.required">
+                  Proszę wypełnić pole
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <button type="submit" class="btn btn-primary float-right" [disabled]="!surveyForm.valid">Zapisz</button>
+      <button class="btn btn-default mr-2 float-right" [routerLink]="['/survey']" [queryParams]="{ type_key: typeKey }">
+        Anuluj
+      </button>
+    </form>
+  </div>
+  <div class="col-md-4"></div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <div class="col-md-1 float-left">
+      <p class="mt-1" id="title">Stanowiska:</p>
+    </div>
+    <div class="col-md-4 float-left">
+      <position-search (onSearchComplete)="onSearchComplete($event)"></position-search>
+    </div>
+    <div class="col-md-7 float-left">
+      <button *ngIf="isAdmin" class="btn btn-xs btn-primary btn-sm float-right" [routerLink]="['/position/new']">
+        Dodaj stanowisko
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="busy.load">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="loader"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!busy.load">
+  <div class="table-scrollable table-fixed-head">
+    <table class="table table-hover">
+      <colgroup>
+        <col width="0" />
+        <col width="25%" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Stanowisko</th>
+          <th>Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let position of filteredPositions; trackBy: trackById">
+          <td>{{ position.name }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary" [routerLink]="['/position', position.id, 'issue']">
+              Wydaj zaświadczenie
+            </button>
+            <button *ngIf="isAdmin" class="btn btn-sm btn-primary ml-1" [routerLink]="['/position', position.id]">
+              Edytuj
+            </button>
+            <button *ngIf="isAdmin" class="btn btn-sm btn-danger ml-1" (click)="delete(position.id)">
+              Usuń
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+// to avoid 65% scale down on print
+@media screen {
+  @import './libs/bootstrap-4.min.scss';
+}
+
+@import "./libs/pace.css";
+@import "./libs/fontello.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~ngx-toastr/toastr";
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+
+@import "./core/core.scss";
+
+@import "./modules/auth.scss";
+@import "./modules/position.scss";
+@import "./modules/factor.scss";
+
+@import "./libs/libs-overwrites.scss";

@@ -1,0 +1,10 @@
+.table-scrollable {
+  overflow-y: auto;
+  height: 80vh;
+}
+
+.table-fixed-head thead tr th {
+  position: sticky;
+  top: -1px;
+  background-color: #FFF;
+}

@@ -1,0 +1,49 @@
+<div class="col-md-12">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <form *ngIf="authForm" class="login__form" [formGroup]="authForm" (ngSubmit)="onSubmit(authForm.value)">
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input
+            type="login"
+            class="form-control"
+            id="login"
+            [class.is-invalid]="login?.invalid"
+            placeholder="Podaj login"
+            formControlName="login"
+          />
+
+          <div *ngIf="login?.invalid" class="invalid-feedback">
+            <div *ngIf="login.errors.required">
+              Login jest wymagany
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Hasło</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            [class.is-invalid]="password?.invalid"
+            placeholder="Podaj hasło"
+            formControlName="password"
+          />
+
+          <div *ngIf="password?.invalid" class="invalid-feedback">
+            <div *ngIf="password.errors.required">
+              Hasło jest wymagane
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block float-right" [disabled]="!authForm.valid || busy.action">
+          Zaloguj się <span *ngIf="busy.action" class="btn-loader"></span>
+        </button>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>

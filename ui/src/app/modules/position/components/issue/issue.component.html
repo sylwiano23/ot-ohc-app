@@ -1,0 +1,271 @@
+<div class="row">
+  <div class="col-md">
+    <form class="position__form" [formGroup]="issueForm" (ngSubmit)="print(issueForm.value)">
+      <div class="row">
+        <div class="form-group col-md">
+          <label for="positionName">Stanowisko - ({{ position.name }})</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Podaj nazwę stanowiska"
+            id="positionName"
+            [class.is-invalid]="positionName?.invalid"
+            formControlName="positionName"
+          />
+
+          <div *ngIf="positionName?.invalid" class="invalid-feedback">
+            <div *ngIf="positionName.errors.required">
+              To pole jest wymagane
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md">
+          <label for="name">Imię</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Podaj imię pracownika"
+            id="name"
+            [class.is-invalid]="name?.invalid"
+            formControlName="name"
+          />
+
+          <div *ngIf="name?.invalid" class="invalid-feedback">
+            <div *ngIf="name.errors.required">
+              To pole jest wymagane
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md">
+          <label for="surname">Nazwisko</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Podaj nazwisko pracownika"
+            id="surname"
+            [class.is-invalid]="surname?.invalid"
+            formControlName="surname"
+          />
+
+          <div *ngIf="surname?.invalid" class="invalid-feedback">
+            <div *ngIf="surname.errors.required">
+              To pole jest wymagane
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md">
+          <label for="peselNumber">PESEL</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Podaj PESEL pracownika"
+            id="peselNumber"
+            [maxlength]="11"
+            [minlength]="11"
+            [class.is-invalid]="peselNumber?.invalid"
+            formControlName="peselNumber"
+          />
+
+          <div *ngIf="peselNumber?.invalid" class="invalid-feedback">
+            <div *ngIf="peselNumber.errors.required">
+              To pole jest wymagane
+            </div>
+            <div *ngIf="peselNumber.errors.maxlength">
+              PESEL musi się składać z 11 cyfr
+            </div>
+            <div *ngIf="peselNumber.errors.minlength">
+              PESEL musi się składać z 11 cyfr
+            </div>
+            <div *ngIf="peselNumber.errors.pattern">
+              PESEL musi się składać tylko z cyfr
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md">
+          <label for="street">Ulica</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Podaj ulice"
+            id="street"
+            [class.is-invalid]="street?.invalid"
+            formControlName="street"
+          />
+
+          <div *ngIf="street?.invalid" class="invalid-feedback">
+            <div *ngIf="street.errors.required">
+              To pole jest wymagane
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md">
+          <label for="houseNumber">Numer domu</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Podaj numer domu"
+            id="houseNumber"
+            [class.is-invalid]="houseNumber?.invalid"
+            formControlName="houseNumber"
+          />
+
+          <div *ngIf="houseNumber?.invalid" class="invalid-feedback">
+            <div *ngIf="houseNumber.errors.required">
+              To pole jest wymagane
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md">
+          <label for="city">Miasto</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Podaj miasto"
+            id="city"
+            [class.is-invalid]="city?.invalid"
+            formControlName="city"
+          />
+
+          <div *ngIf="city?.invalid" class="invalid-feedback">
+            <div *ngIf="city.errors.required">
+              To pole jest wymagane
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md">
+          <label for="certificateType">Typ zaświadczenia</label>
+          <select
+            id="certificateType"
+            class="form-control"
+            formControlName="certificateType"
+            [class.is-invalid]="certificateType?.invalid"
+          >
+            <option *ngFor="let type of certificateTypes" [value]="type.id">{{ type.label }}</option>
+          </select>
+
+          <div *ngIf="certificateType?.invalid" class="invalid-feedback">
+            <div *ngIf="certificateType.errors.required">
+              To pole jest wymagane
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md">
+          <label for="sexType">Płeć</label>
+          <select id="sexType" class="form-control" formControlName="sexType" [class.is-invalid]="sexType?.invalid">
+            <option *ngFor="let type of sexTypes" [value]="type.id">{{ type.label }}</option>
+          </select>
+
+          <div *ngIf="sexType?.invalid" class="invalid-feedback">
+            <div *ngIf="sexType.errors.required">
+              To pole jest wymagane
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary float-right mb-2" [disabled]="!issueForm.valid || busy.print">
+        Drukuj <span *ngIf="busy.print" class="btn-loader"></span>
+      </button>
+      <button class="btn btn-default mr-2 float-right mb-2" [routerLink]="['/position']">
+        Anuluj
+      </button>
+    </form>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col-xl-6 col-md-12">
+    <ng-container *ngIf="position">
+      <div class="form-group">
+        <p>Opis stanowiska</p>
+        <small><label [innerHtml]="position.description"></label></small>
+      </div>
+      <div class="form-group">
+        <p>Czynniki fizyczne</p>
+        <label>{{
+          position.factors["Physical"].length
+            ? (position.factors["Physical"] | mapFactorsToLabels: "Physical":factorsToLabels)
+            : "Brak"
+        }}</label>
+      </div>
+      <div class="form-group">
+        <p>Pyły</p>
+        <label>{{
+          position.factors["Dust"].length
+            ? (position.factors["Dust"] | mapFactorsToLabels: "Dust":factorsToLabels)
+            : "Brak"
+        }}</label>
+      </div>
+      <div class="form-group">
+        <p>Czynniki chemiczne</p>
+        <label>{{
+          position.factors["Chemical"].length
+            ? (position.factors["Chemical"] | mapFactorsToLabels: "Chemical":factorsToLabels)
+            : "Brak"
+        }}</label>
+      </div>
+      <div class="form-group">
+        <p>Czynniki biologiczne</p>
+        <label>{{
+          position.factors["Biological"].length
+            ? (position.factors["Biological"] | mapFactorsToLabels: "Biological":factorsToLabels)
+            : "Brak"
+        }}</label>
+      </div>
+      <div class="form-group">
+        <p>Inne czynniki niebezpieczne</p>
+        <label>{{
+          position.factors["Other"].length
+            ? (position.factors["Other"] | mapFactorsToLabels: "Other":factorsToLabels)
+            : "Brak"
+        }}</label>
+      </div>
+      <div class="form-group">
+        <p>Łaczna liczba czynników niebezpiecznych</p>
+        <label>{{ position.total_hazardous_factors }}</label>
+      </div>
+    </ng-container>
+  </div>
+  <div class="col-xl-6 col-md-12">
+    <div *ngIf="certificateBase64">
+      <ngx-extended-pdf-viewer
+        [base64Src]="certificateBase64"
+        useBrowserLocale="true"
+        height="100vh"
+        [filenameForDownload]="nameValue + '_' + surnameValue + '_zaswiadczenie.pdf.pdf'"
+        [printResolution]="900"
+        [showPrintButton]="true"
+        [showDownloadButton]="true"
+        [showPagingButtons]="true"
+        [showZoomButtons]="true"
+        [showSidebarButton]="false"
+        [showFindButton]="false"
+        [showPresentationModeButton]="false"
+        [showOpenFileButton]="false"
+        [showBookmarkButton]="false"
+        [showSecondaryToolbarButton]="false"
+        [showRotateButton]="false"
+        [showHandToolButton]="false"
+        [showScrollingButton]="false"
+        [showSpreadButton]="false"
+        [showPropertiesButton]="false"
+      ></ngx-extended-pdf-viewer>
+    </div>
+  </div>
+</div>

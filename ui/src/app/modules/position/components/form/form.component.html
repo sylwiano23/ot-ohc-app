@@ -1,0 +1,136 @@
+<form *ngIf="positionForm" class="position__form" [formGroup]="positionForm" (ngSubmit)="onSubmit(positionForm.value)">
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <label for="name">Stanowisko</label>
+
+      <button type="submit" class="btn btn-primary btn-sm float-right" [disabled]="!positionForm.valid || busy.save">
+        Zapisz <span *ngIf="busy.save" class="btn-loader"></span>
+      </button>
+      <button class="btn btn-default btn-sm mr-2 float-right" [routerLink]="['/position']">
+        Anuluj
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Stanowisko"
+      id="name"
+      [class.is-invalid]="name?.invalid"
+      formControlName="name"
+    />
+
+    <div *ngIf="name?.invalid" class="invalid-feedback">
+      <div *ngIf="name.errors.required">
+        To pole jest wymagane
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Opis stanowiska <span class="text-danger">*</span></label>
+
+    <quill-editor id="description" formControlName="description" [modules]="EDITOR_TOOLBAR_CONFIG"></quill-editor>
+
+    <div *ngIf="description?.invalid" class="invalid-feedback">
+      <div *ngIf="description.errors.required">
+        To pole jest wymagane
+      </div>
+    </div>
+  </div>
+<!-- 
+  <div class="form-group">
+    <p>Czynniki fizyczne <label *ngIf="!positionForm.get('physical_factors').value.length">- Brak</label></p>
+
+    <ng-select
+      [items]="factors.Physical"
+      bindLabel="name"
+      bindValue="id"
+      [multiple]="true"
+      [closeOnSelect]="false"
+      [hideSelected]="true"
+      placeholder="Wybierz czynniki"
+      id="physical_factors"
+      formControlName="physical_factors"
+    >
+    </ng-select>
+  </div>
+
+  <div class="form-group">
+    <p>Pyły <label *ngIf="!positionForm.get('dust').value.length">- Brak</label></p>
+
+    <ng-select
+      [items]="factors.Dust"
+      bindLabel="name"
+      bindValue="id"
+      [multiple]="true"
+      [closeOnSelect]="false"
+      [hideSelected]="true"
+      placeholder="Wybierz czynniki"
+      id="dust"
+      formControlName="dust"
+    >
+    </ng-select>
+  </div>
+
+  <div class="form-group">
+    <p>Czynniki chemiczne <label *ngIf="!positionForm.get('chemical_agents').value.length">- Brak</label></p>
+
+    <ng-select
+      [items]="factors.Chemical"
+      bindLabel="name"
+      bindValue="id"
+      [multiple]="true"
+      [closeOnSelect]="false"
+      [hideSelected]="true"
+      placeholder="Wybierz czynniki"
+      id="chemical_agents"
+      formControlName="chemical_agents"
+    >
+    </ng-select>
+  </div>
+
+  <div class="form-group">
+    <p>Czynniki biologiczne <label *ngIf="!positionForm.get('biological_factors').value.length">- Brak</label></p>
+
+    <ng-select
+      [items]="factors.Biological"
+      bindLabel="name"
+      bindValue="id"
+      [multiple]="true"
+      [closeOnSelect]="false"
+      [hideSelected]="true"
+      placeholder="Wybierz czynniki"
+      id="biological_factors"
+      formControlName="biological_factors"
+    >
+    </ng-select>
+  </div>
+
+  <div class="form-group">
+    <p>
+      Inne czynniki niebezpieczne
+      <label *ngIf="!positionForm.get('other_hazardous_factors').value.length">- Brak</label>
+    </p>
+
+    <ng-select
+      [items]="factors.Other"
+      bindLabel="name"
+      bindValue="id"
+      [multiple]="true"
+      [closeOnSelect]="false"
+      [hideSelected]="true"
+      placeholder="Wybierz czynniki"
+      id="other_hazardous_factors"
+      formControlName="other_hazardous_factors"
+    >
+    </ng-select>
+  </div>
+
+  <div class="form-group">
+    <p>Łaczna liczba czynników niebezpiecznych</p>
+    <label>{{ hazardousFactorsNumberTotal }}</label>
+  </div> -->
+</form>

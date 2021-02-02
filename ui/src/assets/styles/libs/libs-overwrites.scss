@@ -1,0 +1,128 @@
+// MENU SUBMENU ON HOVER
+.navbar-nav li:hover .dropdown-menu {
+  display: block;
+}
+.dropdown > .dropdown-toggle:active {
+  pointer-events: none;
+}
+
+ul li {
+  list-style-type: none;
+  display: inline;
+}
+
+.navbar-nav .nav-link {
+  display: inline-block;
+}
+
+.ml-auto {
+  display: inline-block !important;
+}
+// MENU SUBMENU ON HOVER - END
+
+// PDF
+#print {
+  display: block !important;
+}
+#download {
+  display: block !important;
+}
+// PDF - END
+
+// NG-SELECT
+
+.ng-select.ng-select-focused .ng-select-container:after {
+  border-color: #2f694f !important;
+}
+.ng-select.ng-select-focused .ng-select-container .ng-value-container .ng-placeholder {
+  color: #2f694f !important;
+}
+.ng-select.ng-select-focused .ng-select-container .ng-arrow-wrapper .ng-arrow {
+  color: #2f694f !important;
+}
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+  background-color: #2f694f !important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-optgroup.ng-option-selected {
+  color: #2f694f !important;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+  color: #2f694f !important;
+}
+
+// NG-SELECT - end
+
+// BOOSTRAP 4
+
+.navbar-dark {
+  background-color: #2f694f !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #d1d1d1;
+  font-weight: 600;
+
+  &:hover {
+    color: #f1f1f1;
+  }
+}
+
+// ** //
+
+.form-control {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px #ddd solid;
+  &:focus {
+    border-radius: 5px;
+    box-shadow: 0 0 0 0.1rem rgba(40, 89, 67, 0.5);
+  }
+}
+
+.form-control.is-invalid:focus {
+  border-radius: 5px;
+  box-shadow: 0 0 0 0.1rem rgba(220,53,69,.25);
+}
+
+// ** //
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: #2f694f;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: #bbd6ca;
+}
+
+// ** //
+
+.btn-default {
+  border: 1px #eaeaea solid !important;
+}
+
+.btn-primary {
+  background-color: #2f694f;
+  border-color: #3b745a;
+  &:hover {
+    background-color: #285943;
+    border-color: #305e49;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.1rem rgba(40, 89, 67, 0.5);
+  }
+  &:disabled {
+    background-color: #497561;
+    border-color: #517766;
+  }
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: #285943;
+  border-color: #305e49;
+}
+
+// BOOSTRAP 4 - END

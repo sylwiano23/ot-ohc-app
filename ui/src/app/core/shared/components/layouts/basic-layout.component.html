@@ -1,0 +1,9 @@
+<div>
+  <!-- Navigation bar -->
+  <navigation *ngIf="isAuthorized"></navigation>
+
+  <div class="wrapper">
+    <!-- Main view/routes wrapper-->
+    <router-outlet></router-outlet>
+  </div>
+</div>

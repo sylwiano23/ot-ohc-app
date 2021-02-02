@@ -1,0 +1,113 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h4 class="float-left">Badania - {{ SURVEY_TYPES_NAMES[typeKey] }}</h4>
+    <button
+      *ngIf="isAdmin"
+      class="btn btn-sm btn-primary ml-4"
+      [routerLink]="['/survey/new']"
+      [queryParams]="{ type_key: typeKey }"
+    >
+      Dodaj
+    </button>
+
+    <button *ngIf="isAdmin" class="btn btn-sm btn-primary ml-4 float-right">
+      Wyeksportuj do Excela
+    </button>
+  </div>
+</div>
+
+<h4></h4>
+
+<div class="table-scrollable table-fixed-head">
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <ng-container *ngFor="let prop of surveyPropertiesListHeader">
+          <ng-container [ngSwitch]="prop">
+            <th *ngSwitchDefault rowspan="2" (click)="onSortChange(prop)">
+              {{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }} <span [class]="sort | sortDirection: prop"></span>
+            </th>
+            <th *ngSwitchCase="'intermediate_zone'" colspan="2" class="text-center">
+              {{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}
+            </th>
+            <th *ngSwitchCase="'risk_zone'" colspan="2" class="text-center">
+              {{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}
+            </th>
+            <th *ngSwitchCase="'danger_zone'" colspan="2" class="text-center">
+              {{ SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop] }}
+            </th>
+          </ng-container>
+        </ng-container>
+
+        <th rowspan="2">Akcje</th>
+      </tr>
+      <tr *ngIf="typeKey === 'ElectromagneticField'">
+        <th (click)="onSortChange('intermediateZoneE')">
+          E <span [class]="sort | sortDirection: 'intermediateZoneE'"></span>
+        </th>
+        <th (click)="onSortChange('intermediateZoneH')">
+          H <span [class]="sort | sortDirection: 'intermediateZoneH'"></span>
+        </th>
+
+        <th (click)="onSortChange('riskZoneE')">E <span [class]="sort | sortDirection: 'riskZoneE'"></span></th>
+        <th (click)="onSortChange('riskZoneH')">H <span [class]="sort | sortDirection: 'riskZoneH'"></span></th>
+
+        <th (click)="onSortChange('dengerousZoneE')">
+          E <span [class]="sort | sortDirection: 'dengerousZoneE'"></span>
+        </th>
+        <th (click)="onSortChange('dengerousZoneH')">
+          H <span [class]="sort | sortDirection: 'dengerousZoneH'"></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="busy.load">
+        <div class="loader"></div>
+      </tr>
+      <tr *ngFor="let survey of surveys">
+        <ng-container *ngFor="let prop of surveyPropertiesListBody; trackBy: trackById">
+          <ng-container [ngSwitch]="prop">
+            <td *ngSwitchDefault>{{ survey[prop] }}</td>
+            <td *ngSwitchCase="'date'">
+              {{ survey[prop] | date: "shortDate" }}
+            </td>
+            <td *ngSwitchCase="'nextSurveyDate'">
+              {{ survey[prop] | date: "shortDate" }}
+            </td>
+            <td *ngSwitchCase="'isSurveySuspend'">
+              {{ survey[prop] ? "Tak" : "Nie" }}
+            </td>
+            <td *ngSwitchCase="'isNormExceeded'">
+              {{ survey[prop] ? "Tak" : "Nie" }}
+            </td>
+            <td *ngSwitchCase="'isSurveyUsed'">
+              <div class="form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  [placeholder]="SURVEY_TYPES_PROPERTIES_TRANSLATIONS[prop]"
+                  [(ngModel)]="survey[prop]"
+                  (ngModelChange)="onIsSurveyUsedChange()"
+                />
+              </div>
+            </td>
+          </ng-container>
+        </ng-container>
+
+        <td class="text-nowrap">
+          <button
+            *ngIf="isAdmin"
+            class="btn btn-sm btn-primary"
+            [routerLink]="['/survey/', survey.id]"
+            [queryParams]="{ type_key: typeKey }"
+          >
+            Edytuj
+          </button>
+          <button *ngIf="isAdmin" class="btn btn-sm btn-danger ml-2" (click)="delete(survey.id)">
+            Usuń
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

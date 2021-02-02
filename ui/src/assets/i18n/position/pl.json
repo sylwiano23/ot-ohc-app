@@ -1,0 +1,15 @@
+{
+  "action": {
+    "upload": "Upload"
+  },
+  "error": {
+    "load": "Nie udało się załadować",
+    "save": "Nie udało się zapisać"
+  },
+  "success": {
+    "save": "Zapisano"
+  },
+  "title": {
+    "list": "Lista"
+  }
+}

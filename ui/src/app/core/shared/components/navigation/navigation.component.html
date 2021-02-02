@@ -1,0 +1,72 @@
+<nav class="navbar navbar-dark  navbar-expand-sm bg-dark">
+  <a class="navbar-brand" href="#">Zaświadczenia</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" [routerLink]="['/position']">Stanowiska <span class="sr-only">(current)</span> </a>
+      <!-- <li *ngIf="isAdmin" class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="factorDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Czynniki
+        </a>
+        <div class="dropdown-menu mt-0" aria-labelledby="factorDropdown">
+          <a class="dropdown-item" [routerLink]="['/factor']" [queryParams]="{ type_key: 'Other' }"
+            >Inne czynniki niebezpieczne</a
+          >
+        </div>
+      </li> -->
+      <li *ngIf="isAdmin" class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="surveyDropdown"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Badania
+        </a>
+        <div class="dropdown-menu mt-0" aria-labelledby="surveyDropdown">
+          <a class="dropdown-item" [routerLink]="['/survey']" [queryParams]="{ type_key: 'Dust' }">Pyły</a>
+          <a class="dropdown-item" [routerLink]="['/survey']" [queryParams]="{ type_key: 'Chemical' }"
+            >Czynniki chemiczne</a
+          >
+          <a class="dropdown-item" [routerLink]="['/survey']" [queryParams]="{ type_key: 'Biological' }"
+            >Czynniki biologiczne</a
+          >
+          <a class="dropdown-item" [routerLink]="['/survey']" [queryParams]="{ type_key: 'Physical' }"
+            >Czynniki fizyczne</a
+          >
+          <a class="dropdown-item" [routerLink]="['/survey']" [queryParams]="{ type_key: 'Lighting' }"
+            >Oświetlenie czynnik uciążliwy</a
+          >
+          <a class="dropdown-item" [routerLink]="['/survey']" [queryParams]="{ type_key: 'ElectromagneticField' }"
+            >Pole elektromagnetyczne</a
+          >
+          <a class="dropdown-item" [routerLink]="['/survey']" [queryParams]="{ type_key: 'Other' }"
+            >Inne czynniki niebezpieczne</a
+          >
+        </div>
+      </li>
+      <a class="nav-item nav-link float-right" (click)="logout()">Wyloguj się</a>
+    </div>
+  </div>
+</nav>

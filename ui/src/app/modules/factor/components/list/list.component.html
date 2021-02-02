@@ -1,0 +1,61 @@
+<div class="row mb-3">
+  <div class="col-md-12">
+    <h4 class="float-left">
+      {{ FACTOR_TYPES_NAMES[typeKey] }}
+    </h4>
+    <button
+      *ngIf="isAdmin"
+      class="btn btn-sm btn-primary ml-4"
+      [routerLink]="['/factor/new']"
+      [queryParams]="{ type_key: typeKey }"
+    >
+      Dodaj
+    </button>
+  </div>
+</div>
+
+<h4></h4>
+
+<div *ngIf="busy.load">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="loader"></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!busy.load">
+  <div class="table-scrollable table-fixed-head">
+    <table class="table table-hover table-sm">
+      <colgroup>
+        <col width="0" />
+        <col width="15%" />
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th>Nazwa</th>
+          <th>Akcje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let factor of factors; trackBy: trackById">
+          <td>{{ factor.name }}</td>
+          <td>
+            <button
+              *ngIf="isAdmin"
+              class="btn btn-sm btn-primary"
+              [routerLink]="['/factor/', factor.id]"
+              [queryParams]="{ type_key: typeKey }"
+            >
+              Edytuj
+            </button>
+            <button *ngIf="isAdmin" class="btn btn-sm btn-danger ml-2" (click)="delete(factor.id)">
+              Usuń
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

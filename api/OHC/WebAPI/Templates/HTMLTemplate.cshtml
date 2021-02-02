@@ -1,0 +1,421 @@
+@model Application.Certifications.Queries.IssueCertificate.CertificateDto
+@using Domain.Enums;
+@using RazorLight.Text
+
+@{ var factorCounter = 0; }
+
+<style type="text/css">
+    p.dotted {
+        border-bottom: 1px dotted #000;
+        text-decoration: none;
+    }
+
+    tr.spaceUnder > td {
+        padding-bottom: 10px;
+    }
+
+    p.smallFont {
+        font-size: small;
+    }
+</style>
+
+<table style="border: none" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td width="37%" colspan="4" valign="top">
+                <p class="dotted">
+                    </br>
+                </p>
+            </td>
+            <td width="26%" valign="top">
+            </td>
+            <td width="37%" colspan="2" valign="bottom">
+                <p class="dotted" align="center">
+                    <strong>........., @DateTime.Now.ToShortDateString()</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="37%" colspan="4" valign="top">
+                <p class="smallFont" align="center">
+                    (oznaczenie pracodawcy)
+                </p>
+            </td>
+            <td width="26%" valign="top">
+            </td>
+            <td width="37%" colspan="2" valign="top">
+                <p class="smallFont" align="center">
+                    (miejscowość, data)
+                </p>
+            </td>
+        </tr>
+        <tr class="spaceUnder">
+            <td colspan="7" valign="top">
+                <p align="center">
+                    <strong>SKIEROWANIE NA BADANIA LEKARSKIE</strong>
+                </p>
+                <p align="center">
+                    @switch (Model.CertificateType)
+                    {
+                        case CertificateTypeEnum.Control:
+                            <strong>(kontrolne)</strong>
+                            break;
+
+                        case CertificateTypeEnum.Initial:
+                            <strong>(wstępne)</strong>
+                            break;
+
+                        case CertificateTypeEnum.Periodic:
+                            <strong>(okresowe)</strong>
+                            break;
+                    }
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="7">
+                <p>
+                    Działając na podstawie art. 229 § 4a ustawy z dnia 26 czerwca 1974 r. – Kodeks pracy (Dz. U. z 2014 r. poz. 1502, z późn. zm.), kieruję na badania lekarskie:
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" valign="bottom">
+                <p align="left">
+                    Pana
+                </p>
+            </td>
+            <td colspan="6" valign="bottom">
+                <p class="dotted" align="left">
+                    <strong>@Model.Name @Model.Surname</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" valign="top">
+            </td>
+            <td colspan="6" valign="top">
+                <p class="smallFont" align="center">
+                    (imię i nazwisko)
+                </p>
+            </td>
+        </tr>
+        <tr class="spaceUnder">
+            <td width="10%" valign="bottom">
+                <p align="left">
+                    nr PESEL**<sup>)</sup>
+                </p>
+            </td>
+            <td colspan="6" valign="bottom">
+                <p class="dotted" align="left">
+                    <strong>@Model.PeselNumber</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" colspan="2" valign="bottom">
+                <p align="left">
+                    zamieszkałego
+                </p>
+            </td>
+            <td colspan="5" valign="bottom">
+                <p class="dotted" align="left">
+                    <strong>@Model.City, @Model.Street, @Model.HouseNumber</strong>
+                </p>
+            </td>
+        </tr>
+        <tr class="spaceUnder">
+            <td width="205" colspan="2" valign="top">
+            </td>
+            <td width="445" colspan="5" valign="top">
+                <p class="smallFont" align="center">
+                    (miejscowość, ulica, nr domu, nr lokalu)
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="650" colspan="7">
+                <p align="left">
+                    @if (Model.SexType == SexTypeEnum.Female)
+                    {
+                        <span>
+                            zatrudnioną lub podejmującą pracę na stanowisku lub stanowiskach pracy
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            zatrudnionego lub podejmującego pracę na stanowisku lub stanowiskach pracy
+                        </span>
+                    }
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="650" colspan="7" valign="bottom">
+                <p align="center">
+                    <strong>@Model.PositionName</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="650" colspan="7" valign="bottom">
+                <p align="left">
+                    określenie stanowiska/stanowisk*<sup>)</sup> pracy*** <sup>)</sup>:
+                </p>
+            </td>
+        </tr>
+        <tr class="spaceUnder">
+            <td width="650" colspan="7" valign="bottom">
+                @(new RawString(Model.Description))
+            </td>
+        </tr>
+        <tr class="spaceUnder">
+            <td width="650" colspan="7">
+                <p>
+                    Opis warunków pracy uwzględniający informacje o występowaniu na stanowisku lub stanowiskach pracy czynników niebezpiecznych, szkodliwych dla zdrowia lub czynników uciążliwych i innych wynikających ze sposobu wykonywania pracy,
+                    z podaniem wielkości narażenia oraz aktualnych wyników badań i pomiarów czynników szkodliwych dla zdrowia, wykonanych na tym stanowisku/stanowiskach – należy wpisać nazwę czynnika/czynników i wielkość/wielkości narażenia**** <sup>)</sup>:
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" valign="top">
+                <p align="left">
+                    I. Czynniki fizyczne:
+                </p>
+            </td>
+            <td colspan="4" valign="top">
+                <p align="left">
+                    @if (Model.Factors.ContainsKey(FactorTypeEnum.Physical) && Model.Factors[FactorTypeEnum.Physical].Any())
+                    {
+                        @foreach (var factor in Model.Factors[FactorTypeEnum.Physical])
+                        {
+                            @factor<br>
+
+                            factorCounter++;
+                        }
+                    }
+                    else
+                    {
+                        <span>brak</span>
+                    }
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" valign="top">
+                <p align="left">
+                    II. Pyły:
+                </p>
+            </td>
+            <td colspan="4" valign="top">
+                <p align="left">
+                    @if (Model.Factors.ContainsKey(FactorTypeEnum.Dust) && Model.Factors[FactorTypeEnum.Dust].Any())
+                    {
+                        @foreach (var factor in Model.Factors[FactorTypeEnum.Dust])
+                        {
+                            @factor<br>
+
+                            factorCounter++;
+                        }
+                    }
+                    else
+                    {
+                        <span>brak</span>
+                    }
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" valign="top">
+                <p align="left">
+                    III. Czynniki chemiczne:
+                </p>
+            </td>
+            <td colspan="4" valign="top">
+                <p align="left">
+                    @if (Model.Factors.ContainsKey(FactorTypeEnum.Chemical) && Model.Factors[FactorTypeEnum.Chemical].Any())
+                    {
+                        @foreach (var factor in Model.Factors[FactorTypeEnum.Chemical])
+                        {
+                            @factor<br>
+
+                            factorCounter++;
+                        }
+                    }
+                    else
+                    {
+                        <span>brak</span>
+                    }
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" valign="top">
+                <p align="left">
+                    IV. Czynniki biologiczne:
+                </p>
+            </td>
+            <td colspan="4" valign="top">
+                <p align="left">
+                    @if (Model.Factors.ContainsKey(FactorTypeEnum.Biological) && Model.Factors[FactorTypeEnum.Biological].Any())
+                    {
+                        @foreach (var factor in Model.Factors[FactorTypeEnum.Biological])
+                        {
+                            @factor<br>
+
+                            factorCounter++;
+                        }
+                    }
+                    else
+                    {
+                        <span>brak</span>
+                    }
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" valign="top">
+                <p align="left">
+                    V. Inne czynniki w tym niebezpieczne:
+                </p>
+            </td>
+            <td colspan="4" valign="top">
+                <p align="left">
+                    @if (Model.Factors.ContainsKey(FactorTypeEnum.Other) && Model.Factors[FactorTypeEnum.Other].Any())
+                    {
+                        @foreach (var factor in Model.Factors[FactorTypeEnum.Other])
+                        {
+                            @factor<br>
+
+                            factorCounter++;
+                        }
+                    }
+                    else
+                    {
+                        <span>brak</span>
+                    }
+                </p>
+            </td>
+        </tr>
+        <tr class="spaceUnder">
+            <td colspan="3" valign="top">
+            </td>
+            <td colspan="4" valign="top">
+            </td>
+        </tr>
+        <tr>
+            <td width="650" colspan="7" valign="bottom">
+                <p align="left">
+                    Łączna liczba czynników niebezpiecznych, szkodliwych dla zdrowia lub czynników uciążliwych i innych  wynikających ze sposobu wykonywania pracy wskazanych w skierowaniu: <strong>@factorCounter</strong>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="205" colspan="2" valign="top">
+            </td>
+            <td width="208" colspan="3" valign="top">
+            </td>
+            <td width="236" colspan="2" valign="top">
+                <p class="dotted">
+                    </br>
+                    </br>
+                    </br>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="205" colspan="2" valign="top">
+            </td>
+            <td width="208" colspan="3" valign="top">
+            </td>
+            <td width="236" colspan="2" valign="top">
+                <p class="smallFont" align="center">
+                    (podpis pracodawcy)
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br clear="all" />
+<p align="left">
+    Objaśnienia:
+</p>
+<table border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+        <tr>
+            <td width="10%" valign="top">
+                <p align="left">
+                    <sup>*)</sup>
+                </p>
+            </td>
+            <td width="90%" valign="top">
+                <p align="left">
+                    Niepotrzebne skreślić.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" valign="top">
+                <p align="left">
+                    <sup>**)</sup>
+                </p>
+            </td>
+            <td width="90%" valign="top">
+                <p>
+                    W przypadku osoby, której nie nadano numeru PESEL – seria, numer i nazwa dokumentu stwierdzającego tożsamość, a w przypadku osoby przyjmowanej do pracy – data urodzenia.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" valign="top">
+                <p align="left">
+                    <sup>***)</sup>
+                </p>
+            </td>
+            <td width="90%" valign="top">
+                <p>
+                    Opisać: rodzaj pracy, podstawowe czynności, sposób i czas ich wykonywania.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" valign="top">
+                <p align="left">
+                    <sup>****)</sup>
+                </p>
+            </td>
+            <td width="90%" valign="top">
+                <p>
+                    Opis warunków pracy uwzględniający w szczególności przepisy:
+                </p>
+                <p>
+                    1) wydane na podstawie:
+                </p>
+                <p>
+                    a) art. 222 § 3 ustawy z dnia 26 czerwca 1974 r. – Kodeks pracy dotyczące wykazu substancji chemicznych, ich mieszanin, czynników lub procesów technologicznych o działaniu rakotwórczym lub mutagennym,
+                </p>
+                <p>
+                    b) art. 222<sup>1</sup> § 3 ustawy z dnia 26 czerwca 1974 r. – Kodeks pracy dotyczące wykazu szkodliwych czynników biologicznych,
+                </p>
+                <p>
+                    c) art. 227 § 2 ustawy z dnia 26 czerwca 1974 r. – Kodeks pracy dotyczące badań i pomiarów czynników szkodliwych dla zdrowia,
+                </p>
+                <p>
+                    d) art. 228 § 3 ustawy z dnia 26 czerwca 1974 r. – Kodeks pracy dotyczące wykazu najwyższych dopuszczalnych stężeń i natężeń czynników szkodliwych dla zdrowia w środowisku pracy,
+                </p>
+                <p>
+                    e) art. 25 pkt 1 ustawy z dnia 29 listopada 2000 r. – Prawo atomowe (Dz. U. z 2014 r. poz. 1512) dotyczące dawek granicznych promieniowania jonizującego;
+                </p>
+                <p>
+                    2) załącznika nr 1 do rozporządzenia Ministra Zdrowia i Opieki Społecznej z dnia 30 maja 1996 r.
+                    <br /> w sprawie przeprowadzania badań lekarskich pracowników, zakresu profilaktycznej opieki zdrowotnej nad pracownikami oraz orzeczeń lekarskich wydawanych do celów przewidzianych
+                    <br /> w Kodeksie pracy (Dz. U. Nr 69, poz. 332, z późn. zm.)
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    Skierowanie na badania lekarskie jest wydawane w dwóch egzemplarzach, z których jeden otrzymuje osoba kierowana na badania.
+</p>
